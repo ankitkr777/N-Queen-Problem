@@ -10,21 +10,18 @@ public class NQueens {
     }
 
     private boolean isSafe(int row, int col) {
-        // Check this column on upper side
         for (int i = 0; i < row; i++) {
             if (board[i][col] == 1) {
                 return false;
             }
         }
 
-        // Check upper diagonal on left side
         for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
             if (board[i][j] == 1) {
                 return false;
             }
         }
 
-        // Check upper diagonal on right side
         for (int i = row, j = col; i >= 0 && j < N; i--, j++) {
             if (board[i][j] == 1) {
                 return false;
@@ -35,17 +32,17 @@ public class NQueens {
     }
 
     private boolean solveNQueens(int row) {
-        if (row >= N) return true; // Base case: All queens placed
+        if (row >= N) return true;
 
         for (int col = 0; col < N; col++) {
             if (isSafe(row, col)) {
-                board[row][col] = 1; // Place queen
+                board[row][col] = 1;
 
                 if (solveNQueens(row + 1)) {
                     return true;
                 }
 
-                board[row][col] = 0; // Backtrack
+                board[row][col] = 0;
             }
         }
         return false;
